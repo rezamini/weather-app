@@ -14,6 +14,12 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
     },
+    colors: {
+      backgroundColor: "hsl(var(--background-color))",
+      foregroundColor: "hsl(var(--foreground-color))",
+      foregroundSecondaryColor: "hsl(var(--foreground-secondary-color))",
+    },
+
   },
   plugins: [],
 }
