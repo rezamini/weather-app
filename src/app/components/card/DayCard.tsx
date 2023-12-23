@@ -13,9 +13,9 @@ export default function DayCard({
   degree = 32,
 }: dayCardProps) {
   return (
-    <div className="">
+    <div className="flex flex-col items-center justify-center border border-foregroundColor rounded-md p-0.5">
       <div>{icon}</div>
-      <div className="">
+      <div className="text-base text-foregroundSecondaryColor mt-0.5">
         {day}
       </div>
       <div>{degree}&deg;</div>
