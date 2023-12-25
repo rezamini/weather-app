@@ -18,6 +18,9 @@ const config: Config = {
       backgroundColor: "hsl(var(--background-color))",
       foregroundColor: "hsl(var(--foreground-color))",
       foregroundSecondaryColor: "hsl(var(--foreground-secondary-color))",
+      brown: {
+        50: '#fdf8f6',
+      },
     },
 
   },

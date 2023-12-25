@@ -12,9 +12,13 @@ export default function Home() {
         <DayCard icon={<FaSun className="w-16 h-16"/>} day="Monday" degree={32}/>
       </section>
 
-      <table>
+      <table className="w-full text-center border-spacing-0">
         <tbody>
           <TableRow />
+          <TableRow />
+          <TableRow />
+          <TableRow />
+          
         </tbody>
       </table>
     </main>
