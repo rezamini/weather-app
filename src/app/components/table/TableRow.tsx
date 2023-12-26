@@ -2,8 +2,8 @@ import { FaSun } from "react-icons/fa";
 
 export default function TableRow() {
   return (
-    <tr className="[&>td]:p-2 "> 
-    {/* [&>*:nth-child(even)]:bg-borwn-50 odd:bg-foregroundColor*/}
+    <tr className="[&>td]:p-2 even:bg-sky-300/60 odd:bg-sky-300/30 "> 
+    {/* [&>*:nth-child(even)]:bg-borwn-50 */}
       <td >
         <div className="flex flex-col items-center">
           <div>Thursday</div>
