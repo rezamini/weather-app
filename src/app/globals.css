@@ -8,7 +8,7 @@
 
 :root {
   --background-color: 200, 100%, 85%;
-  --foreground-color: 200, 100%, 10%
+  --foreground-color: 200, 100%, 10%; 
   --foreground-secondary-color: 200, 100%, 20%
   --even-row-color: 200, 60%, 70%
   --odd-row-color: 200, 60%, 75%
