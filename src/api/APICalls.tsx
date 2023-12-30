@@ -56,13 +56,13 @@ function parseCurrentWeather({ current, daily }: any) {
 
   // temperature_2m: [maxTemp] same as const maxTemp = daily.temperature_2m[0]
   return {
-    currentTemp: currentTemp,
-    highTemp: maxTemp,
-    lowTemp: minTemp,
-    highFeelsLike: maxFeelsLike,
-    lowFeelsLike: minFeelsLike,
-    windSpeed: windSpeed,
-    precip: precip,
+    currentTemp: Math.round(currentTemp),
+    highTemp: Math.round(maxTemp),
+    lowTemp: Math.round(minTemp),
+    highFeelsLike: Math.round(maxFeelsLike),
+    lowFeelsLike: Math.round(minFeelsLike),
+    windSpeed: Math.round(windSpeed),
+    precip: Math.round(precip * 100) / 100,
     iconCode: iconCode,
   };
 }
