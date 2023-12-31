@@ -25,6 +25,7 @@ export async function getWeather(
       //OR then(({data}))
       return {
         current: parseCurrentWeather(response.data),
+        daily: parseDailyWeather(response.data),
       };
     });
 
@@ -65,4 +66,14 @@ function parseCurrentWeather({ current, daily }: any) {
     precip: Math.round(precip * 100) / 100,
     iconCode: iconCode,
   };
+}
+
+function parseDailyWeather({ daily }: any) {
+  return daily.time.map((time: number, index: number) => {
+    return {
+      timestamp: time * 1000, //second to milliseconds
+      iconCode: daily.weather_code[index],
+      maxTemp: Math.round(daily.temperature_2m_max[index]),
+    };
+  });
 }
