@@ -3,11 +3,23 @@
 
 import axios from "axios";
 
+export type CurrentWeatherType = {
+  currentTemp: number;
+  highTemp: number;
+  lowTemp: number;
+  highFeelsLike: number;
+  lowFeelsLike: number;
+  windSpeed: number;
+  precip: number;
+  iconCode: number;
+};
+
 export async function getWeather(
   lat: number,
   lon: number,
   timezone: string
-): Promise<any> {
+  // Promise<{current:object, daily:object, hourly:object}> {
+): Promise<{current: CurrentWeatherType}> {
   "use server";
 
   return await axios
@@ -42,7 +54,7 @@ export async function getWeather(
 //   return data;
 // }
 
-function parseCurrentWeather({ current, daily }: any) {
+function parseCurrentWeather({ current, daily }: any): CurrentWeatherType {
   const {
     temperature_2m: currentTemp,
     wind_speed_10m: windSpeed,
@@ -81,14 +93,16 @@ function parseDailyWeather({ daily }: any) {
 
 function parseHourlyWeather({ hourly, current }: any) {
   console.log(current.time * 1000);
-  return hourly.time.map((time:number, index:number) => {
-    return {
-      timestamp: time * 1000, 
-      iconCode: hourly.weather_code[index],
-      maxTemp: Math.round(hourly.temperature_2m[index]),
-      feelsLike: Math.round(hourly.apparent_temperature[index]),
-      windSpeed: Math.round(hourly.wind_speed_10m[index]),
-      precip: Math.round(hourly.precipitation[index] * 100) / 100,
-    }
-  }).filter(({timestamp}:any) => timestamp >= current.time * 1000); 
+  return hourly.time
+    .map((time: number, index: number) => {
+      return {
+        timestamp: time * 1000,
+        iconCode: hourly.weather_code[index],
+        maxTemp: Math.round(hourly.temperature_2m[index]),
+        feelsLike: Math.round(hourly.apparent_temperature[index]),
+        windSpeed: Math.round(hourly.wind_speed_10m[index]),
+        precip: Math.round(hourly.precipitation[index] * 100) / 100,
+      };
+    })
+    .filter(({ timestamp }: any) => timestamp >= current.time * 1000);
 }
