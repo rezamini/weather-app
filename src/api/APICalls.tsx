@@ -14,12 +14,18 @@ export type CurrentWeatherType = {
   iconCode: number;
 };
 
+export type DailytWeatherType = {
+  timestamp: number;
+  iconCode: number;
+  maxTemp: number;
+};
+
 export async function getWeather(
   lat: number,
   lon: number,
   timezone: string
   // Promise<{current:object, daily:object, hourly:object}> {
-): Promise<{current: CurrentWeatherType}> {
+): Promise<{current: CurrentWeatherType, daily: DailytWeatherType}> {
   "use server";
 
   return await axios
@@ -81,7 +87,7 @@ function parseCurrentWeather({ current, daily }: any): CurrentWeatherType {
   };
 }
 
-function parseDailyWeather({ daily }: any) {
+function parseDailyWeather({ daily }: any): DailytWeatherType {
   return daily.time.map((time: number, index: number) => {
     return {
       timestamp: time * 1000, //second to milliseconds
