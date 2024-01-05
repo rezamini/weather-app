@@ -18,25 +18,28 @@ export default function Home() {
         10,
         Intl.DateTimeFormat().resolvedOptions().timeZone
       );
-      console.log(allData.current);
+      // console.log(allData.current);
       setCurrentData(allData.current);
     };
     getData();
   }, []);
 
+  // if(currentData == null || currentData == undefined){
+  //   return '';
+  // }
+
   return (
     // className="flex min-h-screen flex-col items-center justify-between p-24"
-    <main>
-      <div>{currentData?.currentTemp}</div>
+    <main className={`${currentData == null ? 'blur-md' : ''} `}>
       <Header
-        currentTemp={31}
-        highTemp={31}
-        lowTemp={20}
-        highFeelsLike={30}
-        lowFeelsLike={20}
-        windSpeed={1}
-        precip={1}
-        
+        currentTemp={currentData?.currentTemp}
+        highTemp={currentData?.highTemp}
+        lowTemp={currentData?.lowTemp}
+        highFeelsLike={currentData?.highFeelsLike}
+        lowFeelsLike={currentData?.lowFeelsLike}
+        windSpeed={currentData?.windSpeed}
+        precip={currentData?.precip}
+        iconCode={currentData?.iconCode}
       />
       <section className="grid grid-cols-[repeat(auto-fit,100px)] gap-2 justify-center p-4">
         <DayCard

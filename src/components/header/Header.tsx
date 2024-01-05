@@ -1,23 +1,34 @@
+
 import Image from "next/image";
 import { IconType } from "react-icons";
 import { FaSun } from "react-icons/fa";
 
 type HeaderProps = {
-  currentTemp: number;
-  highTemp: number;
-  lowTemp: number;
-  highFeelsLike: number;
-  lowFeelsLike: number;
-  windSpeed: number;
-  precip: number;
-  Icon?: React.ReactNode; // IconType |  React.ReactNode
+  currentTemp: number | undefined;
+  highTemp: number | undefined;
+  lowTemp: number | undefined;
+  highFeelsLike: number | undefined;
+  lowFeelsLike: number | undefined;
+  windSpeed: number | undefined;
+  precip: number | undefined;
+  // Icon?: React.ReactNode; // IconType |  React.ReactNode
+  iconCode: number | undefined;
 };
 
-export default function Header({ currentTemp = 31, highTemp=32, lowTemp=9, highFeelsLike=30, lowFeelsLike=20, windSpeed=9, precip=0.1, Icon=<FaSun /> }: HeaderProps) {
+export default function Header({
+  currentTemp = 31,
+  highTemp = 32,
+  lowTemp = 9,
+  highFeelsLike = 30,
+  lowFeelsLike = 20,
+  windSpeed = 9,
+  precip = 0.1,
+  iconCode = 999,
+}: HeaderProps) {
   return (
     <header className="flex items-center my-4">
       <div className="flex w-1/2 justify-center items-center m-0.5 p-0.5 border-r-2 border-foregroundColor">
-      {Icon}
+        {/* {Icon} */}
         <div className="text-3xl ml-4">
           <span data-current-temp>{currentTemp}</span>&deg;
         </div>
