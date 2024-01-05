@@ -1,7 +1,20 @@
-import { FaSun, FaCloudSun, FaCloud, FaSmog, FaCloudRain, FaCloudMoonRain, FaCloudSunRain, FaSnowflake, FaSnowman, FaBolt, FaCloudShowersHeavy } from "react-icons/fa";
+import { IconType } from "react-icons";
+import {
+  FaSun,
+  FaCloudSun,
+  FaCloud,
+  FaSmog,
+  FaCloudRain,
+  FaCloudMoonRain,
+  FaCloudSunRain,
+  FaSnowflake,
+  FaSnowman,
+  FaBolt,
+  FaCloudShowersHeavy,
+} from "react-icons/fa";
 
-export default function IconCode(code: number) {
-  let IconComponent;
+export function getIcon({ code }: any): IconType {
+  let IconComponent: IconType;
 
   switch (code) {
     case 0:
@@ -66,9 +79,62 @@ export default function IconCode(code: number) {
       break;
   }
 
-  return <IconComponent />;
+  return IconComponent;
 }
 
+// export function GetIcon2({ code }: any) {
+//   let IconComponent: IconType;
+
+//   switch (code) {
+//     case 0:
+//     case 1:
+//       IconComponent = FaSun;
+//       break;
+//     case 2:
+//       IconComponent = FaCloudSun;
+//       break;
+
+//     default:
+//       IconComponent = FaSun; // Provide a default icon or handle unknown codes
+//       break;
+//   }
+
+//   return <IconComponent />;
+
+//   // <GetIcon />
+// }
+
+// export function getIcon(code:number): IconType{
+//   let IconComponent;
+
+//   switch (code) {
+//     case 0:
+//     case 1:
+//       IconComponent = FaSun;
+//       break;
+//     case 2:
+//       IconComponent = FaCloudSun;
+//       break;
+//     default:
+//       IconComponent = FaSun; // Provide a default icon or handle unknown codes
+//       break;
+//   }
+
+//   return IconComponent;
+// }
+// function customIcon(icon:React.ReactNode): JSX.Element {
+//   return (
+//     <svg
+//       className={`w-20 h-20 object-contain `} // Apply passed class names
+//       xmlns="http://www.w3.org/2000/svg"
+//       viewBox="0 0 20 20"
+//       fill="currentColor"
+//     >
+//       {/*  icon content */}
+//       {/* ... */}
+//     </svg>
+//   );
+// };
 
 // const weatherIconMap = {
 //     51: FaCloudRain,
@@ -76,6 +142,6 @@ export default function IconCode(code: number) {
 // };
 // const WeatherIcon = ({ code }) => {
 //     const IconComponent = weatherIconMap[code] || DefaultIcon;
-  
+
 //     return <IconComponent />;
 //   };
