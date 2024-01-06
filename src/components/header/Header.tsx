@@ -1,4 +1,4 @@
-
+import { getIcon } from "@/util/IconCode";
 import Image from "next/image";
 import { IconType } from "react-icons";
 import { FaSun } from "react-icons/fa";
@@ -14,7 +14,7 @@ type HeaderProps = {
   // Icon?: React.ReactNode; // IconType |  React.ReactNode
   iconCode: number | undefined;
 };
-
+  
 export default function Header({
   currentTemp = 31,
   highTemp = 32,
@@ -25,10 +25,13 @@ export default function Header({
   precip = 0.1,
   iconCode = 999,
 }: HeaderProps) {
+  // let Icon:JSX.Element = IconCode(iconCode);
+  const Icon = getIcon(iconCode);
   return (
     <header className="flex items-center my-4">
       <div className="flex w-1/2 justify-center items-center m-0.5 p-0.5 border-r-2 border-foregroundColor">
         {/* {Icon} */}
+        {Icon && <Icon className="w-20 h-20 object-contain" />}
         <div className="text-3xl ml-4">
           <span data-current-temp>{currentTemp}</span>&deg;
         </div>
