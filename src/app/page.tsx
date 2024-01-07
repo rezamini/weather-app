@@ -43,12 +43,8 @@ export default function Home() {
       />
       <section className="grid grid-cols-[repeat(auto-fit,100px)] gap-2 justify-center p-4">
         <DayCard
-          icon={<FaSun className="w-16 h-16" />}
-          day="Monday"
-          degree={32}
-        />
-        <DayCard
-          icon={<FaSun className="w-16 h-16" />}
+          // icon={<FaSun className="w-16 h-16" />}
+          iconCode={999}
           day="Monday"
           degree={32}
         />
