@@ -1,5 +1,5 @@
 import { FaSun } from "react-icons/fa";
-
+import { getIcon } from "@/util/IconCode";
 type TableRowProps = {
   timestamp: number | undefined;
   iconCode?: number | undefined;
@@ -17,6 +17,8 @@ export default function TableRow({
   windSpeed = 19,
   precip = 0.1,
 }: TableRowProps) {
+
+  const Icon = getIcon(iconCode);
   return (
     <tr className="[&>td]:p-2 even:bg-sky-300/60 odd:bg-sky-300/30 ">
       {/* [&>*:nth-child(even)]:bg-borwn-50 */}
@@ -28,7 +30,8 @@ export default function TableRow({
         </div>
       </td>
       <td>
-        <FaSun className="w-12 h-12 object-contain" />
+        {/* <FaSun className="w-12 h-12 object-contain" /> */}
+        <Icon className="w-12 h-12 object-contain" />
       </td>
       <td>
         <div className="flex flex-col items-center">
