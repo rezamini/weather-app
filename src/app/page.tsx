@@ -52,10 +52,7 @@ export default function Home() {
 
       <table className="w-full text-center border-spacing-0">
         <tbody>
-          <TableRow />
-          <TableRow />
-          <TableRow />
-          <TableRow />
+          <TableRow maxTemp={31} feelsLike={30} precip={0.1} timestamp={222} windSpeed={22} iconCode={999} />
         </tbody>
       </table>
     </main>
