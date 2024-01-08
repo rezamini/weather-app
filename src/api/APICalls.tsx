@@ -34,7 +34,7 @@ export async function getWeather(
   lon: number,
   timezone: string
   // Promise<{current:object, daily:object, hourly:object}> {
-): Promise<{current: CurrentWeatherType, daily: DailytWeatherType, hourly: HourlyWeatherType}> {
+): Promise<{current: CurrentWeatherType, daily: DailytWeatherType[], hourly: HourlyWeatherType[]}> {
   "use server";
 
   return await axios
@@ -96,7 +96,7 @@ function parseCurrentWeather({ current, daily }: any): CurrentWeatherType {
   };
 }
 
-function parseDailyWeather({ daily }: any): DailytWeatherType {
+function parseDailyWeather({ daily }: any): DailytWeatherType[] {
   return daily.time.map((time: number, index: number) => {
     return {
       timestamp: time * 1000, //second to milliseconds
@@ -106,7 +106,7 @@ function parseDailyWeather({ daily }: any): DailytWeatherType {
   });
 }
 
-function parseHourlyWeather({ hourly, current }: any): HourlyWeatherType {
+function parseHourlyWeather({ hourly, current }: any): HourlyWeatherType[] {
   console.log(current.time * 1000);
   return hourly.time
     .map((time: number, index: number) => {
