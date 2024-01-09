@@ -15,6 +15,8 @@ import { log } from "console";
 
 export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
+  const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
+  const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -29,6 +31,13 @@ export default function Home() {
         setCurrentData(weatherData.current);
       }
 
+      if (weatherData.daily) {
+        setDailyData(weatherData.daily);
+      }
+
+      if (weatherData.hourly) {
+        setHourlyData(weatherData.hourly);
+      }
     };
 
     getData();
@@ -52,12 +61,20 @@ export default function Home() {
         iconCode={currentData?.iconCode}
       />
       <section className="grid grid-cols-[repeat(auto-fit,100px)] gap-2 justify-center p-4">
-        <DayCard
+        {dailyData.map((item, index) => (
+          <DayCard
+            key={index}
+            iconCode={item.iconCode}
+            timestamp={item.timestamp}
+            degree={item.maxTemp}
+          />
+        ))}
+        {/* <DayCard
           // icon={<FaSun className="w-16 h-16" />}
           iconCode={999}
           day="Monday"
           degree={32}
-        />
+        /> */}
       </section>
 
       <table className="w-full text-center border-spacing-0">
