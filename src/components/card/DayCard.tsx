@@ -1,7 +1,7 @@
 import { getIcon } from "@/util/IconCode";
 import { IconType } from "react-icons";
 import { FaSun } from "react-icons/fa";
-
+import { formatTimestampToDay } from "@/util/Date";
 type dayCardProps = {
   // icon: React.ReactNode;
   iconCode: number | undefined;
@@ -16,12 +16,13 @@ export default function DayCard({
   degree = 32,
 }: dayCardProps) {
   const Icon = getIcon(iconCode);
+  const dayDate = formatTimestampToDay(timestamp);
 
   return (
     <div className="flex flex-col items-center justify-center border border-foregroundColor rounded-md p-0.5">
       <div><Icon className="w-16 h-16" /></div>
       <div className="text-base text-foregroundSecondaryColor mt-0.5">
-        {timestamp}
+        {dayDate}
       </div>
       <div>{degree}&deg;</div>
     </div>
