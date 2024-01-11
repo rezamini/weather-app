@@ -67,6 +67,7 @@ export default function Home() {
             iconCode={item.iconCode}
             timestamp={item.timestamp}
             degree={item.maxTemp}
+            // className="border-red-600"
           />
         ))}
         {/* <DayCard
