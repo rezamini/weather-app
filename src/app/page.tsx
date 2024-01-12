@@ -1,17 +1,15 @@
 "use client";
 
-import Header from "../components/header/Header";
-import DayCard from "../components/card/DayCard";
-import { FaSun } from "react-icons/fa";
-import TableRow from "../components/table/TableRow";
-import { useEffect, useState } from "react";
 import {
-  getWeather,
   CurrentWeatherType,
   DailytWeatherType,
   HourlyWeatherType,
+  getWeather,
 } from "@/api/APICalls";
-import { log } from "console";
+import { useEffect, useState } from "react";
+import DayCard from "../components/card/DayCard";
+import Header from "../components/header/Header";
+import TableRow from "../components/table/TableRow";
 
 export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
@@ -80,14 +78,17 @@ export default function Home() {
 
       <table className="w-full text-center border-spacing-0">
         <tbody>
-          <TableRow
-            maxTemp={31}
-            feelsLike={30}
-            precip={0.1}
-            timestamp={222}
-            windSpeed={22}
-            iconCode={999}
-          />
+          {hourlyData.map((item, index) => (
+            <TableRow
+              key={index}
+              maxTemp={item.maxTemp}
+              feelsLike={item.feelsLike}
+              precip={item.precip}
+              timestamp={item.timestamp}
+              windSpeed={item.windSpeed}
+              iconCode={item.iconCode}
+            />
+          ))}
         </tbody>
       </table>
     </main>
