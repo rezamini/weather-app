@@ -1,4 +1,5 @@
 const DAY_FORMATTER = new Intl.DateTimeFormat(undefined, { weekday: "long" });
+const HOUR_FORMATTER = new Intl.DateTimeFormat(undefined, {hour: "numeric", minute: "numeric"});
 
 export function formatTimestampToDay(timestamp: number): string {
   let day = "";
@@ -7,3 +8,13 @@ export function formatTimestampToDay(timestamp: number): string {
   }
   return day;
 }
+
+export function formatTimestampToNumericHour(timestamp: number): string {
+  let hour = "";
+  if(timestamp){
+    hour = HOUR_FORMATTER.format(timestamp);
+  }
+
+  return hour;
+}
+
