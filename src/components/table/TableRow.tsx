@@ -1,5 +1,10 @@
 import { FaSun } from "react-icons/fa";
 import { getIcon } from "@/util/IconCode";
+import {
+  formatTimestampToDay,
+  formatTimestampToNumericHour,
+} from "@/util/Date";
+
 type TableRowProps = {
   timestamp: number | undefined;
   iconCode?: number | undefined;
@@ -17,16 +22,17 @@ export default function TableRow({
   windSpeed = 19,
   precip = 0.1,
 }: TableRowProps) {
-
   const Icon = getIcon(iconCode);
+  const dayDate = formatTimestampToDay(timestamp);
+  const hourDate = formatTimestampToNumericHour(timestamp);
+
   return (
     <tr className="[&>td]:p-2 even:bg-sky-300/60 odd:bg-sky-300/30 ">
       {/* [&>*:nth-child(even)]:bg-borwn-50 */}
       <td>
-        <div className="flex flex-col items-center">
-          {/* <div>Thursday</div>
-          <div>3 PM</div> */}
-          {timestamp}
+        <div className="flex flex-col items-center ">
+          <div>{dayDate}</div>
+          <div className="uppercase">{hourDate}</div>
         </div>
       </td>
       <td>
@@ -49,7 +55,8 @@ export default function TableRow({
         <div className="flex flex-col items-center">
           <div>WIND</div>
           <div>
-            {windSpeed}<span className="font-normal text-sm">mph</span>
+            {windSpeed}
+            <span className="font-normal text-sm">mph</span>
           </div>
         </div>
       </td>
@@ -57,7 +64,8 @@ export default function TableRow({
         <div className="flex flex-col items-center">
           <div>PRECIP</div>
           <div>
-            {precip}<span className="font-normal text-sm">in</span>
+            {precip}
+            <span className="font-normal text-sm">in</span>
           </div>
         </div>
       </td>
