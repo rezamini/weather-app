@@ -30,8 +30,8 @@ export default function Home() {
   useEffect(() => {
     const getData = async () => {
       const weatherData = await getWeather(
-        10,
-        10,
+        location.latitude,
+        location.longitude,
         Intl.DateTimeFormat().resolvedOptions().timeZone
       );
       console.log(weatherData.daily);
