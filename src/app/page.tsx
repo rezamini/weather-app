@@ -15,7 +15,7 @@ export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
   const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
   const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
-  const [location, setLocation] = useState<{latitude:number, longitude:number}>();
+  const [location, setLocation] = useState<{latitude:number, longitude:number}>({latitude:10, longitude:10});
 
   useEffect(() => {
     
