@@ -15,7 +15,18 @@ export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
   const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
   const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
+  const [location, setLocation] = useState<{latitude:number, longitude:number}>();
 
+  useEffect(() => {
+    
+    if('geolocation' in navigator){
+      navigator.geolocation.getCurrentPosition(({coords}) => {
+        const {latitude, longitude} = coords;
+        setLocation({ latitude, longitude });
+      });
+    }
+  }, [])
+  
   useEffect(() => {
     const getData = async () => {
       const weatherData = await getWeather(
@@ -39,7 +50,7 @@ export default function Home() {
     };
 
     getData();
-  }, []);
+  }, [location]);
 
   // if(currentData == null || currentData == undefined){
   //   return '';
