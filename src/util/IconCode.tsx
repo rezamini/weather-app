@@ -13,7 +13,7 @@ import {
   FaCloudShowersHeavy,
 } from "react-icons/fa";
 
-export function getIcon({ code }: any): IconType {
+export function getIcon(code: number): IconType {
   let IconComponent: IconType;
 
   switch (code) {
