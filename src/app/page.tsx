@@ -15,18 +15,27 @@ export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
   const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
   const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
-  const [location, setLocation] = useState<{latitude:number, longitude:number}>({latitude:10, longitude:10});
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  }>({ latitude: 10, longitude: 10 });
 
   useEffect(() => {
-    
-    if('geolocation' in navigator){
-      navigator.geolocation.getCurrentPosition(({coords}) => {
-        const {latitude, longitude} = coords;
-        setLocation({ latitude, longitude });
-      });
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        ({ coords }) => {
+          const { latitude, longitude } = coords;
+          setLocation({ latitude, longitude });
+        },
+        (error) => {
+          alert(
+            "There was an error getting your location. Please allow to use your location and refresh the page."
+          );
+        }
+      );
     }
-  }, [])
-  
+  }, []);
+
   useEffect(() => {
     const getData = async () => {
       const weatherData = await getWeather(
