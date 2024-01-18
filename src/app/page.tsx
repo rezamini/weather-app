@@ -6,15 +6,21 @@ import {
   HourlyWeatherType,
   getWeather,
 } from "@/api/APICalls";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import DayCard from "../components/card/DayCard";
 import Header from "../components/header/Header";
 import TableRow from "../components/table/TableRow";
+const HOURLY_DATA_DISPLAY_LIMIT: number = 10;
 
 export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
   const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
   const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
+  const [currentHourlyDispayIndex, setCurrentHourlyDispayIndex] =
+    useState<number>(0);
+  const [hourlyDisplayData, setHourlyDisplayData] = useState<
+    HourlyWeatherType[]
+  >([]);
   const [location, setLocation] = useState<{
     latitude: number;
     longitude: number;
@@ -36,6 +42,17 @@ export default function Home() {
     }
   }, []);
 
+  const limitHourlyData = useCallback(
+    (data: HourlyWeatherType[]) => {
+      const newData = data.slice(
+        0,
+        HOURLY_DATA_DISPLAY_LIMIT + currentHourlyDispayIndex
+      );
+      setHourlyDisplayData(prevData => [...prevData, ...newData]);
+    },
+    [currentHourlyDispayIndex]
+  );
+
   useEffect(() => {
     const getData = async () => {
       const weatherData = await getWeather(
@@ -43,7 +60,6 @@ export default function Home() {
         location.longitude,
         Intl.DateTimeFormat().resolvedOptions().timeZone
       );
-      console.log(weatherData.daily);
 
       if (weatherData.current) {
         setCurrentData(weatherData.current);
@@ -54,12 +70,17 @@ export default function Home() {
       }
 
       if (weatherData.hourly) {
+        limitHourlyData(weatherData.hourly);
         setHourlyData(weatherData.hourly);
       }
     };
 
     getData();
-  }, [location]);
+  }, [location, limitHourlyData]);
+
+  // useEffect(() => {
+  //   limitHourlyData(hourlyData);
+  // }, [hourlyData, limitHourlyData]);
 
   // if(currentData == null || currentData == undefined){
   //   return '';
@@ -98,7 +119,7 @@ export default function Home() {
 
       <table className="w-full text-center border-spacing-0">
         <tbody>
-          {hourlyData.map((item, index) => (
+          {hourlyDisplayData.map((item, index) => (
             <TableRow
               key={index}
               maxTemp={item.maxTemp}
@@ -111,6 +132,7 @@ export default function Home() {
           ))}
         </tbody>
       </table>
+
     </main>
   );
 }
