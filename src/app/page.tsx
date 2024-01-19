@@ -132,7 +132,18 @@ export default function Home() {
           ))}
         </tbody>
       </table>
-
+      <div className="flex justify-center items-center my-5">
+        <button
+          onClick={() =>
+            setCurrentHourlyDispayIndex(
+              currentHourlyDispayIndex + HOURLY_DATA_DISPLAY_LIMIT
+            )
+          }
+          className="p-4 m-4 border rounded-lg border-foregroundColor bg-foregroundColor text-white text-sm"
+        >
+          Load More
+        </button>
+      </div>
     </main>
   );
 }
