@@ -48,7 +48,8 @@ export default function Home() {
         0,
         HOURLY_DATA_DISPLAY_LIMIT + currentHourlyDispayIndex
       );
-      setHourlyDisplayData(prevData => [...prevData, ...newData]);
+      // setHourlyDisplayData(prevData => [...prevData, ...newData]);
+      setHourlyDisplayData(newData);
     },
     [currentHourlyDispayIndex]
   );
@@ -142,7 +143,7 @@ export default function Home() {
             }
             className="p-4 m-4 border rounded-lg border-foregroundColor bg-foregroundColor text-white text-sm"
           >
-            Load More {hourlyDisplayData.length} < br/> {hourlyData.length} 
+            Load More
           </button>
         </div>
       )}
