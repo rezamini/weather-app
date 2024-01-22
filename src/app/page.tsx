@@ -10,6 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import DayCard from "../components/card/DayCard";
 import Header from "../components/header/Header";
 import TableRow from "../components/table/TableRow";
+import Search from "@/components/search/Search";
 const HOURLY_DATA_DISPLAY_LIMIT: number = 10;
 
 export default function Home() {
@@ -90,6 +91,7 @@ export default function Home() {
   return (
     // className="flex min-h-screen flex-col items-center justify-between p-24"
     <main className={`${currentData == null ? "blur-md" : ""} `}>
+      <Search />
       <Header
         currentTemp={currentData?.currentTemp}
         highTemp={currentData?.highTemp}
