@@ -1,6 +1,11 @@
 import { useState } from "react";
 
-export default function Search() {
+type SearchProps = {
+  latitude: number;
+  longitude: number;
+};
+
+export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
   const [first, setfirst] = useState([{ id: "1" }, { id: "2" }, { id: "3" }]);
   return (
     <div className="flex justify-center m-10 gap-2">
@@ -16,6 +21,7 @@ export default function Search() {
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
+          value={latitude}
           disabled
         />
       </div>
@@ -25,6 +31,7 @@ export default function Search() {
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
+          value={longitude}
           disabled
         />
       </div>

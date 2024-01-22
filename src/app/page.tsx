@@ -91,7 +91,7 @@ export default function Home() {
   return (
     // className="flex min-h-screen flex-col items-center justify-between p-24"
     <main className={`${currentData == null ? "blur-md" : ""} `}>
-      <Search />
+      <Search latitude={location.latitude} longitude={location.longitude}/>
       <Header
         currentTemp={currentData?.currentTemp}
         highTemp={currentData?.highTemp}
