@@ -29,12 +29,23 @@ export type HourlyWeatherType = {
   precip: number;
 };
 
+export type CitySearchType = {
+  id: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+};
+
 export async function getWeather(
   lat: number,
   lon: number,
   timezone: string
   // Promise<{current:object, daily:object, hourly:object}> {
-): Promise<{current: CurrentWeatherType, daily: DailytWeatherType[], hourly: HourlyWeatherType[]}> {
+): Promise<{
+  current: CurrentWeatherType;
+  daily: DailytWeatherType[];
+  hourly: HourlyWeatherType[];
+}> {
   "use server";
 
   return await axios
@@ -120,4 +131,34 @@ function parseHourlyWeather({ hourly, current }: any): HourlyWeatherType[] {
       };
     })
     .filter(({ timestamp }: any) => timestamp >= current.time * 1000);
+}
+
+export async function getCities(cityName: string): Promise<CitySearchType[]> {
+  "use server";
+
+  return await axios
+    .get(
+      "https://geocoding-api.open-meteo.com/v1/search?count=3&language=en&format=json",
+      {
+        params: {
+          name: cityName,
+        },
+      }
+    )
+    .then((response) => {
+      //OR then(({data}))
+      return parseCityData(response.data);
+    });
+}
+
+function parseCityData(data: any): CitySearchType[] {
+  // data: {results: {id:number, name:string}[]}
+  return data.results?.map((item: any) => {
+    return {
+      id: item.id,
+      name: item.name,
+      latitude: item.latitude,
+      longitude: item.longitude,
+    };
+  }) ;
 }
