@@ -160,5 +160,5 @@ function parseCityData(data: any): CitySearchType[] {
       latitude: item.latitude,
       longitude: item.longitude,
     };
-  }) ;
+  }) ?? [];
 }
