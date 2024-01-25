@@ -23,7 +23,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
-          value={latitude}
+          defaultValue={latitude}
           disabled
         />
       </div>
@@ -33,7 +33,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
-          value={longitude}
+          defaultValue={longitude}
           disabled
         />
       </div>
