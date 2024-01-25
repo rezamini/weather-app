@@ -14,7 +14,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
         </label>
         <input className="rounded-md outline-none p-2 text-sm" value={123} />
         <div>
-          <SearchResult />
+          <SearchResult searchResult={[]} />
         </div>
       </div>
       <div className="flex flex-col">
