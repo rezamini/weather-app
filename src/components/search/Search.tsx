@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchResult from "./SearchResult";
+import { getCities, CitySearchType } from "@/api/APICalls";
 type SearchProps = {
   latitude: number;
   longitude: number;
@@ -7,6 +8,16 @@ type SearchProps = {
 
 export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>("");
+  const [searchResult, setSearchResult] = useState<CitySearchType[]>([]);
+  useEffect(() => {
+    if(searchValue.length >= 3){
+      const getSearchData = async () => {
+        const result = await getCities(searchValue);
+        setSearchResult(result);
+      }
+      getSearchData(); 
+    }
+  }, [searchValue])
   
   return (
     <div className="flex justify-center m-10 gap-2">
@@ -21,7 +32,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <div>
-          <SearchResult searchResult={[]}/>
+          <SearchResult searchResult={searchResult}/>
         </div>
       </div>
       <div className="flex flex-col">
