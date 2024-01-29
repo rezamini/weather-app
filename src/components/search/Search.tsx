@@ -9,6 +9,7 @@ type SearchProps = {
 export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CitySearchType[]>([]);
+  const [selectedResult, setSelectedResult] = useState<CitySearchType>({} as CitySearchType)
   useEffect(() => {
     if(searchValue.length >= 3){
       const getSearchData = async () => {
@@ -18,6 +19,10 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
       getSearchData(); 
     }
   }, [searchValue])
+
+  function onClickResultHandler(item: CitySearchType): void {
+    setSelectedResult(item);
+  }
   
   return (
     <div className="flex justify-center m-10 gap-2">
@@ -32,7 +37,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <div>
-          <SearchResult searchResult={searchResult}/>
+          <SearchResult searchResult={searchResult} onClickResultHandler={onClickResultHandler}/>
         </div>
       </div>
       <div className="flex flex-col">

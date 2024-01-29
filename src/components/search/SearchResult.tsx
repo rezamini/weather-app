@@ -5,8 +5,10 @@ import { CitySearchType } from "@/api/APICalls";
 // } & CitySearchType[];
 export default function SearchResult({
   searchResult,
+  onClickResultHandler,
 }: {
   searchResult: CitySearchType[];
+  onClickResultHandler: (item: CitySearchType) => void;
 }) {
   // const [first, setfirst] = useState([{ id: "1", city:"london", latitude:38.4499712, longitude:27.230208 }, { id: "2", city:"london2", latitude:38.4499712, longitude:27.230208 }, { id: "3", city:"london3", latitude:38.4499712, longitude:27.230208 }]);
 
@@ -18,7 +20,7 @@ export default function SearchResult({
     <React.Fragment>
       {React.Children.map(children, (child) =>
         React.cloneElement(child, {
-          // onClick: () => onClickResultHandler(item),
+          onClick: () => onClickResultHandler(item),
         })
       )}
     </React.Fragment>
