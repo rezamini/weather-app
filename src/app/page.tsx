@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  CitySearchType,
   CurrentWeatherType,
   DailytWeatherType,
   HourlyWeatherType,
@@ -17,6 +18,7 @@ export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
   const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
   const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
+  const [selectedResult, setSelectedResult] = useState<CitySearchType>({} as CitySearchType)
   const [currentHourlyDispayIndex, setCurrentHourlyDispayIndex] =
     useState<number>(0);
   const [hourlyDisplayData, setHourlyDisplayData] = useState<
@@ -57,9 +59,12 @@ export default function Home() {
 
   useEffect(() => {
     const getData = async () => {
+      const latitude = Object.keys(selectedResult).length > 0 ? selectedResult.latitude : location.latitude;
+      const longitude = Object.keys(selectedResult).length > 0 ? selectedResult.longitude : location.longitude;
+
       const weatherData = await getWeather(
-        location.latitude,
-        location.longitude,
+        latitude,
+        longitude,
         Intl.DateTimeFormat().resolvedOptions().timeZone
       );
 
@@ -78,7 +83,11 @@ export default function Home() {
     };
 
     getData();
-  }, [location, limitHourlyData]);
+  }, [location, limitHourlyData, selectedResult]);
+
+  function onClickResultHandler(item: CitySearchType): void {
+    setSelectedResult(item);
+  }
 
   // useEffect(() => {
   //   limitHourlyData(hourlyData);
@@ -91,7 +100,7 @@ export default function Home() {
   return (
     // className="flex min-h-screen flex-col items-center justify-between p-24"
     <main className={`${currentData == null ? "blur-md" : ""} `}>
-      <Search latitude={location.latitude} longitude={location.longitude}/>
+      <Search latitude={location.latitude} longitude={location.longitude} onClickResultHandler={onClickResultHandler}/>
       <Header
         currentTemp={currentData?.currentTemp}
         highTemp={currentData?.highTemp}

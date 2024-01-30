@@ -4,9 +4,10 @@ import { getCities, CitySearchType } from "@/api/APICalls";
 type SearchProps = {
   latitude: number;
   longitude: number;
+  onClickResultHandler: (item: CitySearchType) => void;
 };
 
-export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
+export default function Search({ latitude = 10, longitude = 10, onClickResultHandler }: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CitySearchType[]>([]);
   const [selectedResult, setSelectedResult] = useState<CitySearchType>({} as CitySearchType)
@@ -20,9 +21,10 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
     }
   }, [searchValue]);
 
-  function onClickResultHandler(item: CitySearchType): void {
-    setSelectedResult(item);
-  }
+  // function setSearchResultValues(item: CitySearchType): void {
+  //   setSelectedResult(item);
+  //   onClickResultHandler(item);
+  // }
 
   return (
     <div className="flex justify-center m-10 gap-2">
@@ -39,7 +41,10 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
         <div>
           <SearchResult
             searchResult={searchResult}
-            onClickResultHandler={onClickResultHandler}
+            onClickResultHandler={(item: CitySearchType) => {
+              setSelectedResult(item);
+              onClickResultHandler(item);
+            }}
           />
         </div>
       </div>
