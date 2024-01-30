@@ -36,11 +36,11 @@ export default function SearchResult({
           {searchResult.map((item, index) => {
             return (
               <FragmentClickWrapper key={item.id} item={item}>
-                <div className="text-xs text-foregroundColor">{item.name}</div>
-                <div className="ml-auto mr-2 text-xs text-foregroundColor">
+                <div className="text-xs text-foregroundColor hover:cursor-pointer">{item.name}</div>
+                <div className="ml-auto mr-2 text-xs text-foregroundColor hover:cursor-pointer">
                   {Math.round(item.latitude * 100) / 100}
                 </div>
-                <div className="mx-auto text-xs text-foregroundColor">
+                <div className="mx-auto text-xs text-foregroundColor hover:cursor-pointer">
                   {Math.round(item.longitude * 100) / 100}
                 </div>
               </FragmentClickWrapper>
