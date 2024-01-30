@@ -11,19 +11,19 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
   const [searchResult, setSearchResult] = useState<CitySearchType[]>([]);
   const [selectedResult, setSelectedResult] = useState<CitySearchType>({} as CitySearchType)
   useEffect(() => {
-    if(searchValue.length >= 3){
+    if (searchValue.length >= 3) {
       const getSearchData = async () => {
         const result = await getCities(searchValue);
         setSearchResult(result);
-      }
-      getSearchData(); 
+      };
+      getSearchData();
     }
-  }, [searchValue])
+  }, [searchValue]);
 
   function onClickResultHandler(item: CitySearchType): void {
     setSelectedResult(item);
   }
-  
+
   return (
     <div className="flex justify-center m-10 gap-2">
       <div className="flex flex-col">
@@ -37,7 +37,10 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
           onChange={(e) => setSearchValue(e.target.value)}
         />
         <div>
-          <SearchResult searchResult={searchResult} onClickResultHandler={onClickResultHandler}/>
+          <SearchResult
+            searchResult={searchResult}
+            onClickResultHandler={onClickResultHandler}
+          />
         </div>
       </div>
       <div className="flex flex-col">
@@ -46,7 +49,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
-          defaultValue={latitude}
+          defaultValue={`${Object.keys(selectedResult).length > 0 ? selectedResult.latitude : latitude }`}
           disabled
         />
       </div>
@@ -56,7 +59,7 @@ export default function Search({ latitude = 10, longitude = 10 }: SearchProps) {
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
-          defaultValue={longitude}
+          defaultValue={`${Object.keys(selectedResult).length > 0 ? selectedResult.longitude : longitude}`}
           disabled
         />
       </div>
