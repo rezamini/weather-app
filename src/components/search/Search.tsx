@@ -42,6 +42,7 @@ export default function Search({ latitude = 10, longitude = 10, onClickResultHan
           <SearchResult
             searchResult={searchResult}
             onClickResultHandler={(item: CitySearchType) => {
+              setSearchResult([]);
               setSelectedResult(item);
               onClickResultHandler(item);
             }}
