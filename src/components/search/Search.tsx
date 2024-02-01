@@ -27,7 +27,7 @@ export default function Search({ latitude = 10, longitude = 10, onClickResultHan
   // }
 
   return (
-    <div className="flex justify-center m-10 gap-2">
+    <div className="flex justify-center mb-10 mt-6 gap-2">
       <div className="flex flex-col">
         <label className="text-xs text-foregroundColor font-bold mb-1">
           Search City

@@ -18,7 +18,9 @@ export default function Home() {
   const [currentData, setCurrentData] = useState<CurrentWeatherType>();
   const [dailyData, setDailyData] = useState<DailytWeatherType[]>([]);
   const [hourlyData, setHourlyData] = useState<HourlyWeatherType[]>([]);
-  const [selectedResult, setSelectedResult] = useState<CitySearchType>({} as CitySearchType)
+  const [selectedResult, setSelectedResult] = useState<CitySearchType>(
+    {} as CitySearchType
+  );
   const [currentHourlyDispayIndex, setCurrentHourlyDispayIndex] =
     useState<number>(0);
   const [hourlyDisplayData, setHourlyDisplayData] = useState<
@@ -59,8 +61,14 @@ export default function Home() {
 
   useEffect(() => {
     const getData = async () => {
-      const latitude = Object.keys(selectedResult).length > 0 ? selectedResult.latitude : location.latitude;
-      const longitude = Object.keys(selectedResult).length > 0 ? selectedResult.longitude : location.longitude;
+      const latitude =
+        Object.keys(selectedResult).length > 0
+          ? selectedResult.latitude
+          : location.latitude;
+      const longitude =
+        Object.keys(selectedResult).length > 0
+          ? selectedResult.longitude
+          : location.longitude;
 
       const weatherData = await getWeather(
         latitude,
@@ -100,7 +108,18 @@ export default function Home() {
   return (
     // className="flex min-h-screen flex-col items-center justify-between p-24"
     <main className={`${currentData == null ? "blur-md" : ""} `}>
-      <Search latitude={location.latitude} longitude={location.longitude} onClickResultHandler={onClickResultHandler}/>
+      {Object.keys(selectedResult).length > 0 && (
+        <div className="flex justify-center items-center mt-6">
+          <div className="text-center pl-2 text-foregroundColor text-2xl font-medium ">
+            {selectedResult.name}
+          </div>
+        </div>
+      )}
+      <Search
+        latitude={location.latitude}
+        longitude={location.longitude}
+        onClickResultHandler={onClickResultHandler}
+      />
       <Header
         currentTemp={currentData?.currentTemp}
         highTemp={currentData?.highTemp}
