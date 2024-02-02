@@ -7,6 +7,7 @@ import {
   HourlyWeatherType,
   getWeather,
 } from "@/api/APICalls";
+import { FaMapMarkerAlt } from "react-icons/fa";
 import { useCallback, useEffect, useState } from "react";
 import DayCard from "../components/card/DayCard";
 import Header from "../components/header/Header";
@@ -25,7 +26,7 @@ export default function Home() {
     useState<number>(0);
   const [hourlyDisplayData, setHourlyDisplayData] = useState<
     HourlyWeatherType[]
-  >([]);
+  >([]); 
   const [location, setLocation] = useState<{
     latitude: number;
     longitude: number;
@@ -110,6 +111,7 @@ export default function Home() {
     <main className={`${currentData == null ? "blur-md" : ""} `}>
       {Object.keys(selectedResult).length > 0 && (
         <div className="flex justify-center items-center mt-6">
+          <FaMapMarkerAlt className="w-6 h-6 object-contain"/>
           <div className="text-center pl-2 text-foregroundColor text-2xl font-medium ">
             {selectedResult.name}
           </div>
