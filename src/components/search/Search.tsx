@@ -7,10 +7,16 @@ type SearchProps = {
   onClickResultHandler: (item: CitySearchType) => void;
 };
 
-export default function Search({ latitude = 10, longitude = 10, onClickResultHandler }: SearchProps) {
+export default function Search({
+  latitude = 10,
+  longitude = 10,
+  onClickResultHandler,
+}: SearchProps) {
   const [searchValue, setSearchValue] = useState<string>("");
   const [searchResult, setSearchResult] = useState<CitySearchType[]>([]);
-  const [selectedResult, setSelectedResult] = useState<CitySearchType>({} as CitySearchType)
+  const [selectedResult, setSelectedResult] = useState<CitySearchType>(
+    {} as CitySearchType
+  );
   useEffect(() => {
     if (searchValue.length >= 3) {
       const getSearchData = async () => {
@@ -27,7 +33,7 @@ export default function Search({ latitude = 10, longitude = 10, onClickResultHan
   // }
 
   return (
-    <div className="flex justify-center mb-10 mt-6 gap-2">
+    <div className="flex flex-col justify-center mb-10 mt-6 gap-2 mx-10 md:flex-row">
       <div className="flex flex-col">
         <label className="text-xs text-foregroundColor font-bold mb-1">
           Search City
@@ -55,7 +61,11 @@ export default function Search({ latitude = 10, longitude = 10, onClickResultHan
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
-          defaultValue={`${Object.keys(selectedResult).length > 0 ? selectedResult.latitude : latitude }`}
+          defaultValue={`${
+            Object.keys(selectedResult).length > 0
+              ? selectedResult.latitude
+              : latitude
+          }`}
           disabled
         />
       </div>
@@ -65,7 +75,11 @@ export default function Search({ latitude = 10, longitude = 10, onClickResultHan
         </label>
         <input
           className="rounded-md outline-none p-2 text-sm"
-          defaultValue={`${Object.keys(selectedResult).length > 0 ? selectedResult.longitude : longitude}`}
+          defaultValue={`${
+            Object.keys(selectedResult).length > 0
+              ? selectedResult.longitude
+              : longitude
+          }`}
           disabled
         />
       </div>
