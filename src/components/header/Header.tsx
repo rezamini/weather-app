@@ -1,7 +1,4 @@
 import { getIcon } from "@/util/IconCode";
-import Image from "next/image";
-import { IconType } from "react-icons";
-import { FaSun } from "react-icons/fa";
 
 type HeaderProps = {
   currentTemp: number | undefined;
@@ -28,7 +25,7 @@ export default function Header({
   // let Icon:JSX.Element = IconCode(iconCode);
   const Icon = getIcon(iconCode);
   return (
-    <header className="flex items-center my-4">
+    <header className="flex items-center my-4 mx-10">
       <div className="flex w-1/2 justify-center items-center m-0.5 p-0.5 border-r-2 border-foregroundColor">
         {/* {Icon} */}
         {Icon && <Icon className="w-20 h-20 object-contain" />}
