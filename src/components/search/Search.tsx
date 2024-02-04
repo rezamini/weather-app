@@ -24,6 +24,9 @@ export default function Search({
         setSearchResult(result);
       };
       getSearchData();
+    } else {
+      //set the serach results to empty array because there isnt any result for that length. this triggers the result dropdown to close.
+      setSearchResult([]);
     }
   }, [searchValue]);
 
