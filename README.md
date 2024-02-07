@@ -7,8 +7,8 @@ In this Next.js project, a weather app is developed with Tailwind CSS and Open-M
 ## Demo
 ![Screenshot](public/images/snapshot-1.png)
 <p float="left" align="center">
-  <img src="public/images/snapshot-2.png" width="500" />
-  <img src="public/images/snapshot-3.png" width="500" />
+  <img src="public/images/snapshot-2.png" width="400" />
+  <img src="public/images/snapshot-3.png" width="400" />
 </p>
 
 ## Getting Started
